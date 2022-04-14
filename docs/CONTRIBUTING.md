@@ -6,7 +6,7 @@ Thank you for investing your time in contributing to Champ Grid for Angular
 
 Use the following command to build the library.
 
-```bash
+```console
 $ ng build c-grid-angular
 ```
 
@@ -14,7 +14,7 @@ $ ng build c-grid-angular
 
 Build the library and then use the following commands to create a symbolic link to the package.
 
-```bash
+```console
 $ cd dist\c-grid-angular
 # npm link
 ```
@@ -35,7 +35,7 @@ Then create a new angular project and add `"preserveSymlinks": true` in your `an
 
 Use the following command in a terminal to include the library to your test project.
 
-```bash
+```console
 $ npm link c-grid-angular
 ```
 
