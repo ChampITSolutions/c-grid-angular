@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'lib-c-grid-angular',
-  template: `
-    <p>
-      c-grid-angular works!
-    </p>
-  `,
-  styles: [
-  ]
+  selector: 'c-grid',
+  templateUrl: './c-grid-angular.component.html',
+  styleUrls: ['./c-grid-angular.component.scss']
 })
 export class CGridAngularComponent implements OnInit {
 

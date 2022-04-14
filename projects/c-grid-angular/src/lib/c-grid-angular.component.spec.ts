@@ -8,7 +8,7 @@ describe('CGridAngularComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CGridAngularComponent ]
+      declarations: [CGridAngularComponent]
     })
       .compileComponents()
   })
