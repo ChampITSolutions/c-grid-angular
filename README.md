@@ -4,6 +4,8 @@
 ![GitHub](https://img.shields.io/github/license/ChampITSolutions/c-grid-angular)
 ![GitHub issues](https://img.shields.io/github/issues/ChampITSolutions/c-grid-angular)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/ChampITSolutions/c-grid-angular)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/ChampITSolutions/c-grid-angular)
+![npm](https://img.shields.io/npm/v/c-grid-angular)
 
 ## Contributors
 
