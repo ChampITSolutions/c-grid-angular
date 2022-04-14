@@ -1,0 +1,51 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "c-grid-angular": {
+      "projectType": "library",
+      "root": "projects/c-grid-angular",
+      "sourceRoot": "projects/c-grid-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/c-grid-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/c-grid-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/c-grid-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/c-grid-angular/src/test.ts",
+            "tsConfig": "projects/c-grid-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/c-grid-angular/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/c-grid-angular/**/*.ts",
+              "projects/c-grid-angular/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "c-grid-angular",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
+}
