@@ -1,1 +1,14 @@
-<h1>Hello World!</h1>
+<div [class.table-responsive]="responsive">
+  <table class="table" [class.table-striped]="striped" aria-describedby="c-grid-table">
+    <thead>
+      <tr>
+        <th *ngFor="let header of headerOrder">{{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let column of headerOrder">{{row[column]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
