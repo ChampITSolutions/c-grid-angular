@@ -11,6 +11,7 @@
 
 - Responsiveness (Bootstrap)
 - Striped Rows (Bootstrap)
+- Column Alignment
 
 ## Getting Started
 
@@ -87,12 +88,42 @@ ngOnInit(): void {
 }
 ```
 
+## Configurations
+
+| Property   | Type                                | Default   | Possible Values |
+| ---------- | ----------------------------------- | --------- | --------------- |
+| data       | [CGridConfigData](#CGridConfigData) | undefined | N/A             |
+| responsive | boolean                             | false     | true, false     |
+| striped    | boolean                             | false     | true, false     |
+
+### CGridConfigData
+
+| Property | Type                                              | Default   | Possible Values |
+| -------- | ------------------------------------------------- | --------- | --------------- |
+| columns  | [CGridConfigDataColumns](#CGridConfigDataColumns) | undefined | N/A             |
+
+#### CGridConfigDataColumns
+
+| Property | Type                                            | Default | Possible Values |
+| -------- | ----------------------------------------------- | ------- | --------------- |
+| columnId | [CGridConfigDataColumn](#CGridConfigDataColumn) | N/A     | N/A             |
+
+##### CGridConfigDataColumn
+
+| Property | Type   | Default | Possible Values    |
+| -------- | ------ | ------- | ------------------ |
+| align    | string | start   | start, center, end |
+
+## Issue Reporting
+
+If you have found a bug in the grid, please report it in the [issues](https://github.com/ChampITSolutions/c-grid-angular/issues) section.
+
+## How to Contribute
+
+Please read the [docs](docs/CONTRIBUTING.md) about how to contribute for more information
+
 ## Contributors
 
 <a href="https://github.com/ChampITSolutions/c-grid-angular">
   <img src="https://contrib.rocks/image?repo=ChampITSolutions/c-grid-angular"/>
 </a>
-
-## How to Contribute
-
-Please read the [docs](docs/CONTRIBUTING.md) about how to contribute for more information

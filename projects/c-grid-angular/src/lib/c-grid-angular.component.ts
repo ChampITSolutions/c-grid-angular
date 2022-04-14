@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { CGridConf } from './c-grid-angular.enum'
 import { CGridConfig, CGridData } from './c-grid-angular.interface'
 
 @Component({
@@ -37,6 +38,7 @@ export class CGridAngularComponent implements OnInit {
     return this._headerOrder
   }
 
+  CGridConf = CGridConf
   responsive = false
   striped = false
 
@@ -44,4 +46,12 @@ export class CGridAngularComponent implements OnInit {
     console.log(this._data)
   }
 
+  getConfig(conf: CGridConf, columnName: string | undefined): string {
+    switch (conf) {
+      case CGridConf.ColumnAlign: {
+        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
+          this.config.data.columns[columnName].align ?? 'start' : 'start'
+      }
+    }
+  }
 }

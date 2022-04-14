@@ -87,12 +87,16 @@ ngOnInit(): void {
 }
 ```
 
+## Issue Reporting
+
+If you have found a bug in the grid, please report it in the [issues](https://github.com/ChampITSolutions/c-grid-angular/issues) section.
+
+## How to Contribute
+
+Please read the [docs](docs/CONTRIBUTING.md) about how to contribute for more information
+
 ## Contributors
 
 <a href="https://github.com/ChampITSolutions/c-grid-angular">
   <img src="https://contrib.rocks/image?repo=ChampITSolutions/c-grid-angular"/>
 </a>
-
-## How to Contribute
-
-Please read the [docs](docs/CONTRIBUTING.md) about how to contribute for more information

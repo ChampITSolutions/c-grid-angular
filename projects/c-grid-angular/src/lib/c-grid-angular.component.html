@@ -2,12 +2,15 @@
   <table class="table" [class.table-striped]="striped" aria-describedby="c-grid-table">
     <thead>
       <tr>
-        <th *ngFor="let header of headerOrder">{{header}}</th>
+        <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header)">
+          {{header}}
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let row of data">
-        <td *ngFor="let column of headerOrder">{{row[column]}}</td>
+        <td *ngFor="let column of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, column)">
+          {{row[column]}}</td>
       </tr>
     </tbody>
   </table>
