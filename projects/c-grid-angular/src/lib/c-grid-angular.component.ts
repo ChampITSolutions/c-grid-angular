@@ -46,7 +46,7 @@ export class CGridAngularComponent implements OnInit {
     console.log(this._data)
   }
 
-  getConfig(conf: CGridConf, columnName: string | undefined): string | boolean {
+  getConfig(conf: CGridConf, columnName: string | undefined): string | boolean | undefined {
     switch (conf) {
       case CGridConf.ColumnAlign: {
         return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
@@ -57,6 +57,25 @@ export class CGridAngularComponent implements OnInit {
         return columnName && this.config?.data?.columns && this.config.data.columns[columnName] &&
           this.config.data.columns[columnName].bold ? true : false
       }
+
+      case CGridConf.ColumnPrefix: {
+        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
+          this.config.data.columns[columnName].prefix : undefined
+      }
+
+      case CGridConf.ColumnSuffix: {
+        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
+          this.config.data.columns[columnName].suffix : undefined
+      }
     }
+  }
+
+  getDisplayValue(value: string | number | null | undefined | Date | boolean, column: string): string {
+    let returnVal = value
+
+    returnVal = `${this.getConfig(CGridConf.ColumnPrefix, column) ?? ''}${returnVal}`
+    returnVal = `${returnVal}${this.getConfig(CGridConf.ColumnSuffix, column) ?? ''}`
+
+    return returnVal
   }
 }

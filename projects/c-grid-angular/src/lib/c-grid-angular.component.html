@@ -10,7 +10,9 @@
     <tbody>
       <tr *ngFor="let row of data">
         <td *ngFor="let column of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, column)">
-          <span [class.fw-bold]="getConfig(CGridConf.ColumnBold, column)">{{row[column]}}</span>
+          <span [class.fw-bold]="getConfig(CGridConf.ColumnBold, column)">
+            {{getDisplayValue(row[column], column)}}
+          </span>
         </td>
       </tr>
     </tbody>

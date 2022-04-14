@@ -28,4 +28,8 @@ interface CGridConfigDataColumn {
   align?: 'start' | 'end' | 'center'
   /** Set true to bold the column. Default value is false */
   bold?: boolean
+  /** Set column prefix */
+  prefix?: string
+  /** Set column suffix */
+  suffix?: string
 }

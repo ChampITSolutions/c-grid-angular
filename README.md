@@ -9,8 +9,8 @@
 
 ## Features
 
-- Responsiveness (Bootstrap)
-- Striped Rows (Bootstrap)
+- Responsiveness
+- Striped Rows
 - Column Configurations
   - Alignment
   - Bold
@@ -57,8 +57,9 @@ config: CGridConfig = {
     columns: {
       amount: {
         align: "end",
+        prefix: "$",
       },
-      id: { bold: true },
+      id: { bold: true, suffix: "--" },
     },
   },
 };
@@ -120,10 +121,12 @@ ngOnInit(): void {
 
 ##### CGridConfigDataColumn
 
-| Property | Type    | Default | Possible Values    |
-| -------- | ------- | ------- | ------------------ |
-| align    | string  | start   | start, center, end |
-| bold     | boolean | false   | true, false        |
+| Property | Type    | Default   | Possible Values       |
+| -------- | ------- | --------- | --------------------- |
+| align    | string  | start     | start, center, end    |
+| bold     | boolean | false     | true, false           |
+| prefix   | string  | undefined | Any string, undefined |
+| suffix   | string  | undefined | Any string, undefined |
 
 ## Issue Reporting
 
@@ -138,3 +141,7 @@ Please read the [docs](docs/CONTRIBUTING.md) about how to contribute for more in
 <a href="https://github.com/ChampITSolutions/c-grid-angular">
   <img src="https://contrib.rocks/image?repo=ChampITSolutions/c-grid-angular"/>
 </a>
+
+## License
+
+Champ Grid for Angular is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
