@@ -14,6 +14,9 @@
 - Column Configurations
   - Alignment
   - Bold
+  - Custom Name
+  - Prefix
+  - Suffix
 
 ## Getting Started
 
@@ -58,8 +61,9 @@ config: CGridConfig = {
       amount: {
         align: "end",
         prefix: "$",
+        name: "Amount",
       },
-      id: { bold: true, suffix: "--" },
+      id: { bold: true, suffix: "--", name: "#" },
     },
   },
 };
@@ -125,6 +129,7 @@ ngOnInit(): void {
 | -------- | ------- | --------- | --------------------- |
 | align    | string  | start     | start, center, end    |
 | bold     | boolean | false     | true, false           |
+| name     | string  | undefined | Any string, undefined |
 | prefix   | string  | undefined | Any string, undefined |
 | suffix   | string  | undefined | Any string, undefined |
 

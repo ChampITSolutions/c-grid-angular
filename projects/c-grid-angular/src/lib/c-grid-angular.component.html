@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header)">
-          {{header}}
+          {{getConfig(CGridConf.ColumnName, header)}}
         </th>
       </tr>
     </thead>

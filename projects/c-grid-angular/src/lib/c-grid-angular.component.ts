@@ -58,6 +58,11 @@ export class CGridAngularComponent implements OnInit {
           this.config.data.columns[columnName].bold ? true : false
       }
 
+      case CGridConf.ColumnName: {
+        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
+          this.config.data.columns[columnName].name ?? columnName : columnName
+      }
+
       case CGridConf.ColumnPrefix: {
         return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
           this.config.data.columns[columnName].prefix : undefined
@@ -67,6 +72,7 @@ export class CGridAngularComponent implements OnInit {
         return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
           this.config.data.columns[columnName].suffix : undefined
       }
+
     }
   }
 
