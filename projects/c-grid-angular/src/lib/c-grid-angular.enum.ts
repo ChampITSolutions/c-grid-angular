@@ -1,3 +1,3 @@
 export enum CGridConf {
-  ColumnAlign
+  ColumnAlign, ColumnBold
 }

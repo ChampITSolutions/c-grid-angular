@@ -11,7 +11,9 @@
 
 - Responsiveness (Bootstrap)
 - Striped Rows (Bootstrap)
-- Column Alignment
+- Column Configurations
+  - Alignment
+  - Bold
 
 ## Getting Started
 
@@ -51,6 +53,14 @@ import { CGridConfig } from "c-grid-angular";
 config: CGridConfig = {
   responsive: true,
   striped: true,
+  data: {
+    columns: {
+      amount: {
+        align: "end",
+      },
+      id: { bold: true },
+    },
+  },
 };
 ```
 
@@ -104,15 +114,16 @@ ngOnInit(): void {
 
 #### CGridConfigDataColumns
 
-| Property | Type                                            | Default | Possible Values |
-| -------- | ----------------------------------------------- | ------- | --------------- |
-| columnId | [CGridConfigDataColumn](#CGridConfigDataColumn) | N/A     | N/A             |
+| Property                               | Type                                            | Default | Possible Values |
+| -------------------------------------- | ----------------------------------------------- | ------- | --------------- |
+| columnId (Can add one for each column) | [CGridConfigDataColumn](#CGridConfigDataColumn) | N/A     | N/A             |
 
 ##### CGridConfigDataColumn
 
-| Property | Type   | Default | Possible Values    |
-| -------- | ------ | ------- | ------------------ |
-| align    | string | start   | start, center, end |
+| Property | Type    | Default | Possible Values    |
+| -------- | ------- | ------- | ------------------ |
+| align    | string  | start   | start, center, end |
+| bold     | boolean | false   | true, false        |
 
 ## Issue Reporting
 

@@ -26,4 +26,6 @@ interface CGridConfigDataColumns {
 interface CGridConfigDataColumn {
   /** Column alignment */
   align?: 'start' | 'end' | 'center'
+  /** Set true to bold the column. Default value is false */
+  bold?: boolean
 }

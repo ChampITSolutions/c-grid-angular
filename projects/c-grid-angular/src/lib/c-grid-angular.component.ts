@@ -46,11 +46,16 @@ export class CGridAngularComponent implements OnInit {
     console.log(this._data)
   }
 
-  getConfig(conf: CGridConf, columnName: string | undefined): string {
+  getConfig(conf: CGridConf, columnName: string | undefined): string | boolean {
     switch (conf) {
       case CGridConf.ColumnAlign: {
         return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
           this.config.data.columns[columnName].align ?? 'start' : 'start'
+      }
+
+      case CGridConf.ColumnBold: {
+        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] &&
+          this.config.data.columns[columnName].bold ? true : false
       }
     }
   }
