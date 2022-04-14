@@ -1,24 +1,98 @@
-# CGridAngular
+# Champ Grid for Angular
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
+![GitHub package.json version](https://img.shields.io/github/package-json/v/ChampITSolutions/c-grid-angular)
+![GitHub](https://img.shields.io/github/license/ChampITSolutions/c-grid-angular)
+![GitHub issues](https://img.shields.io/github/issues/ChampITSolutions/c-grid-angular)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/ChampITSolutions/c-grid-angular)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/ChampITSolutions/c-grid-angular)
+![npm](https://img.shields.io/npm/v/c-grid-angular)
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name --project c-grid-angular` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project c-grid-angular`.
-> Note: Don't forget to add `--project c-grid-angular` or else it will be added to the default project in your `angular.json` file. 
+- Responsiveness (Bootstrap)
+- Striped Rows (Bootstrap)
 
-## Build
+## Getting Started
 
-Run `ng build c-grid-angular` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Install CGrid & Dependencies
 
-## Publishing
+```console
+$ npm install c-grid-angular bootstrap
+```
 
-After building your library with `ng build c-grid-angular`, go to the dist folder `cd dist/c-grid-angular` and run `npm publish`.
+### Add CGrid Placeholder to HTML
 
-## Running unit tests
+```html
+<c-grid [data]="gridData" [config]="gridConfig"></c-grid>
+```
 
-Run `ng test c-grid-angular` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Importing CGrid Module
 
-## Further help
+```ts
+import { CGridAngularModule } from "c-grid-angular";
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, CGridAngularModule],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+## Set CGrid Configurations
+
+```ts
+import { CGridConfig } from "c-grid-angular";
+```
+
+```ts
+config: CGridConfig = {
+  responsive: true,
+  striped: true,
+};
+```
+
+## Set CGrid Data
+
+```ts
+import { CGridData } from "c-grid-angular";
+```
+
+```ts
+data: CGridData[] = []
+
+ngOnInit(): void {
+  this.data = [{
+    id: 1,
+    name: "Andrew Miller",
+    email: "andrew@miller.com",
+    amount: 1334.55
+  }, {
+    id: 2,
+    name: "Chuck Steve",
+    email: "chuck@steve.com",
+    amount: 1234.55
+  }, {
+    id: 3,
+    name: "Monika Galler",
+    email: "monika@galler.com",
+    amount: 4567.55
+  }, {
+    id: 4,
+    name: "Joe Tribbiani",
+    email: "joe@tribbiani.com",
+    amount: 4567.55
+  }]
+}
+```
+
+## Contributors
+
+<a href="https://github.com/ChampITSolutions/c-grid-angular">
+  <img src="https://contrib.rocks/image?repo=ChampITSolutions/c-grid-angular"/>
+</a>
+
+## How to Contribute
+
+Please read the [docs](docs/CONTRIBUTING.md) about how to contribute for more information
