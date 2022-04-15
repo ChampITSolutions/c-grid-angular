@@ -23,7 +23,7 @@ interface CGridConfigDataColumns {
   [key: string]: CGridConfigDataColumn
 }
 
-interface CGridConfigDataColumn {
+export interface CGridConfigDataColumn {
   /** Column alignment */
   align?: 'start' | 'end' | 'center'
   /** Set true to bold the column. Default value is false */

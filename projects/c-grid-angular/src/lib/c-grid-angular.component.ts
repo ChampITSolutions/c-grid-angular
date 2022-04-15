@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { CGridConf } from './c-grid-angular.enum'
-import { CGridConfig, CGridData } from './c-grid-angular.interface'
+import { CGridConfig, CGridConfigDataColumn, CGridData } from './c-grid-angular.interface'
 
 @Component({
   selector: 'c-grid',
@@ -42,35 +42,37 @@ export class CGridAngularComponent implements OnInit {
   responsive = false
   striped = false
 
+  private getColumnConfig(columnName?: string): CGridConfigDataColumn | undefined {
+    return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
+      this.config.data.columns[columnName] : undefined
+  }
+
   ngOnInit(): void {
     console.log(this._data)
   }
 
-  getConfig(conf: CGridConf, columnName: string | undefined): string | boolean | undefined {
+  getConfig(conf: CGridConf, columnName?: string): string | boolean | undefined {
     switch (conf) {
       case CGridConf.ColumnAlign: {
-        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
-          this.config.data.columns[columnName].align ?? 'start' : 'start'
+        const column = this.getColumnConfig(columnName)
+        return column ? column.align : 'start'
       }
 
       case CGridConf.ColumnBold: {
-        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] &&
-          this.config.data.columns[columnName].bold ? true : false
+        const column = this.getColumnConfig(columnName)
+        return column ? column.bold ?? false : false
       }
 
       case CGridConf.ColumnName: {
-        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
-          this.config.data.columns[columnName].name ?? columnName : columnName
+        return this.getColumnConfig(columnName)?.name ?? columnName
       }
 
       case CGridConf.ColumnPrefix: {
-        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
-          this.config.data.columns[columnName].prefix : undefined
+        return this.getColumnConfig(columnName)?.prefix
       }
 
       case CGridConf.ColumnSuffix: {
-        return columnName && this.config?.data?.columns && this.config.data.columns[columnName] ?
-          this.config.data.columns[columnName].suffix : undefined
+        return this.getColumnConfig(columnName)?.suffix
       }
 
     }
