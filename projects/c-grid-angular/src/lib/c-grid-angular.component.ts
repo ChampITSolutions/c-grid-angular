@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common'
 import { Component, Input, OnInit } from '@angular/core'
 import { CGridConf } from './c-grid-angular.enum'
 import { CGridConfig, CGridConfigDataColumn, CGridData } from './c-grid-angular.interface'
@@ -47,6 +48,8 @@ export class CGridAngularComponent implements OnInit {
       this.config.data.columns[columnName] : undefined
   }
 
+  constructor(private decimalPipe: DecimalPipe) { }
+
   ngOnInit(): void {
     console.log(this._data)
   }
@@ -75,12 +78,17 @@ export class CGridAngularComponent implements OnInit {
         return this.getColumnConfig(columnName)?.suffix
       }
 
+      case CGridConf.ColumnCommaSeparate: {
+        const column = this.getColumnConfig(columnName)
+        return column ? column.commaSeparate ?? false : false
+      }
+
     }
   }
 
   getDisplayValue(value: string | number | null | undefined | Date | boolean, column: string): string {
     let returnVal = value
-
+    returnVal = `${this.getConfig(CGridConf.ColumnCommaSeparate, column) ? this.decimalPipe.transform(Number(returnVal), '1.0') : returnVal}`
     returnVal = `${this.getConfig(CGridConf.ColumnPrefix, column) ?? ''}${returnVal}`
     returnVal = `${returnVal}${this.getConfig(CGridConf.ColumnSuffix, column) ?? ''}`
 

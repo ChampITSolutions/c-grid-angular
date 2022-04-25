@@ -34,4 +34,6 @@ export interface CGridConfigDataColumn {
   prefix?: string
   /** Set column suffix */
   suffix?: string
+  /** Set true to separate each 3 digits by a comma (Applicable for numbers only) */
+  commaSeparate?: boolean
 }
