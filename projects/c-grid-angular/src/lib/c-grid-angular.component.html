@@ -1,0 +1,20 @@
+<div [class.table-responsive]="responsive">
+  <table class="table" [class.table-striped]="striped" aria-describedby="c-grid-table">
+    <thead>
+      <tr>
+        <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header)">
+          {{getConfig(CGridConf.ColumnName, header)}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let column of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, column)">
+          <span [class.fw-bold]="getConfig(CGridConf.ColumnBold, column)">
+            {{getDisplayValue(row[column], column)}}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
