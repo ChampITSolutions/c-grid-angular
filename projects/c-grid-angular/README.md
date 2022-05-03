@@ -125,13 +125,14 @@ ngOnInit(): void {
 
 ##### CGridConfigDataColumn
 
-| Property | Type    | Default   | Possible Values       |
-| -------- | ------- | --------- | --------------------- |
-| align    | string  | start     | start, center, end    |
-| bold     | boolean | false     | true, false           |
-| name     | string  | undefined | Any string, undefined |
-| prefix   | string  | undefined | Any string, undefined |
-| suffix   | string  | undefined | Any string, undefined |
+| Property          | Type    | Default   | Possible Values       |
+| --------          | ------- | --------- | --------------------- |
+| align             | string  | start     | start, center, end    |
+| bold              | boolean | false     | true, false           |
+| name              | string  | undefined | Any string, undefined |
+| prefix            | string  | undefined | Any string, undefined |
+| suffix            | string  | undefined | Any string, undefined |
+| commaSeparate     | boolean | false     | true, false           |
 
 ## Issue Reporting
 
