@@ -43,13 +43,13 @@ interface CGridConfigPagination {
 
 export interface CGridConfigDataColumn {
   /** Column alignment */
-  align?: 'start' | 'end' | 'center'
+  align?: AlignmentTypes
   /** Set true to bold the column. Default value is false */
   bold?: boolean
   /** Set true to separate each 3 digits by a comma (Applicable for numbers only) */
   commaSeparate?: boolean
   /** Data type for sorting */
-  dataType?: 'string' | 'date' | 'number'
+  dataType?: DataTypes
   /** Set true to disable sorting by the grid and just trigger the sort click event. Default is false */
   disableInternalSort?: boolean
   /** If want to use the value of a different column in view */
@@ -66,5 +66,9 @@ export interface CGridConfigDataColumn {
 
 export interface CGridSortClickOut {
   column: string
-  type: 'asc' | 'desc' | 'none'
+  type: SortTypes
 }
+
+type SortTypes = 'asc' | 'desc' | 'none'
+type AlignmentTypes = 'start' | 'end' | 'center'
+type DataTypes = 'string' | 'date' | 'number'
