@@ -14,7 +14,7 @@ export class CGridAngularComponent implements OnInit {
   set data(value: CGridData[]) {
     this._data = value?.length ? value.slice() : []
     this.sortedData = value?.length ? value.slice() : []
-    this._headerOrder = Object.keys(value[0])
+    this._headerOrder = this._headerOrder.length ? this._headerOrder : Object.keys(value[0])
 
     this.changePageSize()
     this.changePage(this.page)
@@ -32,6 +32,7 @@ export class CGridAngularComponent implements OnInit {
     this.paginationEnabled = value?.pagination?.enable ?? false
     this.pageSize = value?.pagination?.pageSize ?? 10
     this.dataLength = value?.data?.length ?? 0
+    this._headerOrder = value?.header?.order ?? this.headerOrder
   }
   get config(): CGridConfig | undefined {
     return this._config
@@ -99,6 +100,11 @@ export class CGridAngularComponent implements OnInit {
       case CGridConf.ColumnDisableInternalSort: {
         const column = this.getColumnConfig(columnName)
         return column ? column.disableInternalSort ?? false : false
+      }
+
+      case CGridConf.ColumnDisplayColumn: {
+        const column = this.getColumnConfig(columnName)
+        return column ? column.displayColumn ?? columnName : columnName
       }
 
       case CGridConf.ColumnName: {

@@ -7,12 +7,19 @@ export interface CGridData {
 export interface CGridConfig {
   /** Data configurations */
   data?: CGridConfigData
+  /** Header configurations */
+  header?: CGridConfigHeader
   /** Pagination config */
   pagination?: CGridConfigPagination
   /** Set true to enable responsiveness. Default is false. */
   responsive?: boolean
   /** Set true to enable table strips. Default is false. */
   striped?: boolean
+}
+
+interface CGridConfigHeader {
+  /** Put headers in the order that you required. */
+  order: string[]
 }
 
 interface CGridConfigData {
@@ -45,6 +52,8 @@ export interface CGridConfigDataColumn {
   dataType?: 'string' | 'date' | 'number'
   /** Set true to disable sorting by the grid and just trigger the sort click event. Default is false */
   disableInternalSort?: boolean
+  /** If want to use the value of a different column in view */
+  displayColumn?: string
   /** Custom column name */
   name?: string
   /** Set column prefix */
