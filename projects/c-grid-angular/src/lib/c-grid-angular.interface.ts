@@ -7,6 +7,8 @@ export interface CGridData {
 export interface CGridConfig {
   /** Data configurations */
   data?: CGridConfigData
+  /** Pagination config */
+  pagination?: CGridConfigPagination
   /** Set true to enable responsiveness. Default is false. */
   responsive?: boolean
   /** Set true to enable table strips. Default is false. */
@@ -16,11 +18,20 @@ export interface CGridConfig {
 interface CGridConfigData {
   /** Columns configurations */
   columns?: CGridConfigDataColumns
+  /** Set data length if want to set a custom data size (Pagination purposes) */
+  length?: number
 }
 
 interface CGridConfigDataColumns {
   /** Column configurations. Key name should be exactly as keys in the data set. */
   [key: string]: CGridConfigDataColumn
+}
+
+interface CGridConfigPagination {
+  /** Set true to enable pagination. Default is false */
+  enable: boolean
+  /** Set custom page size. Default is 10 */
+  pageSize?: number
 }
 
 export interface CGridConfigDataColumn {

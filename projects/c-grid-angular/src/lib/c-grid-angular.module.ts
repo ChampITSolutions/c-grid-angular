@@ -1,5 +1,6 @@
 import { CommonModule, DecimalPipe } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { FormsModule } from '@angular/forms'
 import { CGridAngularComponent } from './c-grid-angular.component'
 
 @NgModule({
@@ -7,7 +8,8 @@ import { CGridAngularComponent } from './c-grid-angular.component'
     CGridAngularComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     CGridAngularComponent

@@ -14,8 +14,10 @@ export class CGridAngularComponent implements OnInit {
   set data(value: CGridData[]) {
     this._data = value?.length ? value.slice() : []
     this.sortedData = value?.length ? value.slice() : []
-
     this._headerOrder = Object.keys(value[0])
+
+    this.changePageSize()
+    this.changePage(this.page)
   }
   get data(): CGridData[] {
     return this._data
@@ -27,11 +29,16 @@ export class CGridAngularComponent implements OnInit {
 
     this.responsive = value?.responsive ?? false
     this.striped = value?.striped ?? false
+    this.paginationEnabled = value?.pagination?.enable ?? false
+    this.pageSize = value?.pagination?.pageSize ?? 10
+    this.dataLength = value?.data?.length ?? 0
   }
   get config(): CGridConfig | undefined {
     return this._config
   }
 
+  @Output() pageChanged = new EventEmitter<number>()
+  @Output() pageSizeChanged = new EventEmitter<number>()
   @Output() sortClick = new EventEmitter<CGridSortClickOut>()
 
   private _data: CGridData[] = []
@@ -45,6 +52,14 @@ export class CGridAngularComponent implements OnInit {
   CGridConf = CGridConf
   responsive = false
   striped = false
+
+  paginationEnabled = false
+  pageSize = 10
+  pageData: CGridData[] = []
+  page = 1
+  pageNumbers: number[] = []
+  dataLength = 0
+
   sortDirection = 0
   sortBy = ''
   sortedData: CGridData[] = []
@@ -163,6 +178,62 @@ export class CGridAngularComponent implements OnInit {
           type: sortType
         })
       }
+    }
+
+    this.changePage(this.page)
+  }
+
+  changePageSize(): void {
+    if (this.paginationEnabled) {
+      this.pageNumbers = []
+
+      let pagesCount = this.dataLength ? this.dataLength / this.pageSize : this.data.length / this.pageSize
+
+      if ((this.dataLength ? this.dataLength % this.pageSize : this.data.length % this.pageSize)) {
+        pagesCount++
+      }
+
+      for (let i = 1; i <= pagesCount; i++) {
+        this.pageNumbers.push(i)
+      }
+
+      if (!this.pageNumbers.includes(this.page)) {
+        this.page = 1
+      }
+    }
+  }
+
+  changePageSizeClick(): void {
+    this.changePageSize()
+
+    if (this.paginationEnabled) {
+      this.changePage(this.page)
+
+      if (this.pageSizeChanged.observed) {
+        this.pageSizeChanged.emit(this.pageSize)
+      }
+    }
+  }
+
+  changePage(page: number): void {
+    this.page = page
+    this.pageData = []
+
+    let start = this.pageSize * this.page - this.pageSize
+    const endStep01 = this.data.length > this.pageSize * this.page ? this.pageSize * this.page : this.data.length
+    let end = (this.data.length > this.pageSize ? endStep01 : this.data.length)
+
+    if (!this.paginationEnabled) {
+      start = 0
+      end = this.data.length
+    }
+
+    for (let i = start; i < end; i++) {
+      this.pageData.push(this.sortBy !== '' ? this.sortedData[i] : this.data[i])
+    }
+
+    if (this.pageChanged.observed && this.data.length) {
+      this.pageChanged.emit(this.page)
     }
   }
 }
