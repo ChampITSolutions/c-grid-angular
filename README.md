@@ -11,6 +11,8 @@
 
 - Responsiveness
 - Striped Rows
+- Pagination
+  - Custom Default Page Size
 - Column Configurations
   - Alignment
   - Bold
@@ -30,8 +32,10 @@ $ npm install c-grid-angular bootstrap
 
 ### Add CGrid Placeholder to HTML
 
+Please note that it's important to have config before data in the placeholder.
+
 ```html
-<c-grid [data]="gridData" [config]="gridConfig"></c-grid>
+<c-grid [config]="gridConfig" [data]="gridData"></c-grid>
 ```
 
 ### Importing CGrid Module
@@ -109,17 +113,20 @@ ngOnInit(): void {
 
 ## Configurations
 
-| Property   | Type                                | Default   | Possible Values |
-| ---------- | ----------------------------------- | --------- | --------------- |
-| data       | [CGridConfigData](#CGridConfigData) | undefined | N/A             |
-| responsive | boolean                             | false     | true, false     |
-| striped    | boolean                             | false     | true, false     |
+| Property   | Type                                            | Default   | Possible Values |
+| ---------- | ----------------------------------------------- | --------- | --------------- |
+| data       | [CGridConfigData](#CGridConfigData)             | undefined | N/A             |
+| header     | [CGridConfigHeader](#CGridConfigHeader)         | undefined | N/A             |
+| pagination | [CGridConfigPagination](#CGridConfigPagination) | undefined | N/A             |
+| responsive | boolean                                         | false     | true, false     |
+| striped    | boolean                                         | false     | true, false     |
 
 ### CGridConfigData
 
-| Property | Type                                              | Default   | Possible Values |
-| -------- | ------------------------------------------------- | --------- | --------------- |
-| columns  | [CGridConfigDataColumns](#CGridConfigDataColumns) | undefined | N/A             |
+| Property | Type                                              | Default   | Possible Values       | Description                     |
+| -------- | ------------------------------------------------- | --------- | --------------------- | ------------------------------- |
+| columns  | [CGridConfigDataColumns](#CGridConfigDataColumns) | undefined | N/A                   | Column Properties               |
+| length   | number                                            | undefined | Any number, undefined | Custom data length (pagination) |
 
 #### CGridConfigDataColumns
 
@@ -138,18 +145,36 @@ Following settings are applied to data within the selected column.
 | commaSeparate       | boolean | false     | true, false           | Comma separate numbers                                   |
 | dataType            | string  | string    | string, date, number  | Used as sort by type                                     |
 | disableInternalSort | boolean | false     | true, false           | Disable internal sort and emit sortClick event           |
+| displayColumn       | string  | undefined | Any string, undefined | Used to show value from different column                 |
 | name                | string  | undefined | Any string, undefined | If provided, this will be used as the name of the column |
 | prefix              | string  | undefined | Any string, undefined | Prefix to the column data                                |
 | sort                | boolean | false     | true, false           | Enable sorting                                           |
 | suffix              | string  | undefined | Any string, undefined | Suffix to the column data                                |
 
+### CGridConfigHeader
+
+| Property | Type     | Default | Possible Values  | Description                                        |
+| -------- | -------- | ------- | ---------------- | -------------------------------------------------- |
+| order    | string[] | N/A     | Array of strings | Put only required headers in custom order if using |
+
+### CGridConfigPagination
+
+Pagination configurations
+
+| Property | Type    | Default | Possible Values       | Description                 |
+| -------- | ------- | ------- | --------------------- | --------------------------- |
+| enable   | boolean | false   | true, false           | Enable pagination           |
+| pageSize | number  | 10      | Any number, undefined | Set default pagination size |
+
 ## Emitters
 
-### sortClick
+| Emitter         | Output Data Type                        | Description                                                    |
+| --------------- | --------------------------------------- | -------------------------------------------------------------- |
+| pageChanged     | number                                  | Page number is emitted when currently active page is changed   |
+| pageSizeChanged | number                                  | Page size is emitted when the page size of the grid is changed |
+| sortClick       | [CGridSortClickOut](#CGridSortClickOut) | Emitted when column sort is clicked                            |
 
-This event will be emitted when sorting a column.
-
-**Output Data Type**
+### CGridSortClickOut
 
 ```ts
 interface CGridSortClickOut {

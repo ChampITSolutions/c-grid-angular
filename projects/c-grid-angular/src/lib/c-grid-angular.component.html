@@ -22,7 +22,7 @@
       <tr *ngFor="let row of pageData">
         <td *ngFor="let column of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, column)">
           <span [class.fw-bold]="getConfig(CGridConf.ColumnBold, column)">
-            {{getDisplayValue(row[column], column)}}
+            {{getDisplayValue(row[getConfig(CGridConf.ColumnDisplayColumn, column)?.toString() ?? column], column)}}
           </span>
         </td>
       </tr>

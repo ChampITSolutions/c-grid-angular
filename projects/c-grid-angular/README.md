@@ -32,6 +32,8 @@ $ npm install c-grid-angular bootstrap
 
 ### Add CGrid Placeholder to HTML
 
+Please note that it's important to have config before data in the placeholder.
+
 ```html
 <c-grid [config]="gridConfig" [data]="gridData"></c-grid>
 ```
@@ -114,6 +116,7 @@ ngOnInit(): void {
 | Property   | Type                                            | Default   | Possible Values |
 | ---------- | ----------------------------------------------- | --------- | --------------- |
 | data       | [CGridConfigData](#CGridConfigData)             | undefined | N/A             |
+| header     | [CGridConfigHeader](#CGridConfigHeader)         | undefined | N/A             |
 | pagination | [CGridConfigPagination](#CGridConfigPagination) | undefined | N/A             |
 | responsive | boolean                                         | false     | true, false     |
 | striped    | boolean                                         | false     | true, false     |
@@ -142,10 +145,17 @@ Following settings are applied to data within the selected column.
 | commaSeparate       | boolean | false     | true, false           | Comma separate numbers                                   |
 | dataType            | string  | string    | string, date, number  | Used as sort by type                                     |
 | disableInternalSort | boolean | false     | true, false           | Disable internal sort and emit sortClick event           |
+| displayColumn       | string  | undefined | Any string, undefined | Used to show value from different column                 |
 | name                | string  | undefined | Any string, undefined | If provided, this will be used as the name of the column |
 | prefix              | string  | undefined | Any string, undefined | Prefix to the column data                                |
 | sort                | boolean | false     | true, false           | Enable sorting                                           |
 | suffix              | string  | undefined | Any string, undefined | Suffix to the column data                                |
+
+### CGridConfigHeader
+
+| Property | Type     | Default | Possible Values  | Description                                        |
+| -------- | -------- | ------- | ---------------- | -------------------------------------------------- |
+| order    | string[] | N/A     | Array of strings | Put only required headers in custom order if using |
 
 ### CGridConfigPagination
 
