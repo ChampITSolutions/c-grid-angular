@@ -2,13 +2,24 @@
   <table class="table" [class.table-striped]="striped" aria-describedby="c-grid-table">
     <thead>
       <tr>
-        <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header)">
-          {{getConfig(CGridConf.ColumnName, header)}}
+        <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header) + 
+          (getConfig(CGridConf.ColumnSort, header) ? ' text-primary sort' : '')">
+          <span [class.text-primary]="getConfig(CGridConf.ColumnSort, header)" (click)="sort(header)">
+            {{getConfig(CGridConf.ColumnName, header)}}
+          </span>
+          <span *ngIf="sortBy === header">
+            <small *ngIf="sortDirection === 1">
+              <i class="bi bi-caret-down-fill" aria-hidden="true"></i>
+            </small>
+            <small *ngIf="sortDirection === 2">
+              <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
+            </small>
+          </span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data">
+      <tr *ngFor="let row of pageData">
         <td *ngFor="let column of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, column)">
           <span [class.fw-bold]="getConfig(CGridConf.ColumnBold, column)">
             {{getDisplayValue(row[column], column)}}
@@ -17,4 +28,55 @@
       </tr>
     </tbody>
   </table>
+  <div class="container-fluid" *ngIf="paginationEnabled">
+    <div class="row">
+      <div class="col-6">
+        <div *ngIf="paginationEnabled" class="text-start">
+          <span>
+            Showing
+            <select [(ngModel)]="pageSize" (change)="changePageSizeClick()" class="form-select show-count">
+              <option value="0">ALL</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="500">100</option>
+            </select> of
+            {{dataLength ? dataLength : data.length}} entries
+          </span>
+        </div>
+      </div>
+      <div class="col-6 d-flex align-items-end justify-content-end">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item" [class.disabled]="page == 1">
+              <a class="page-link" aria-label="Start" (click)="changePage(1)">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item" [class.disabled]="page == 1">
+              <a class="page-link" aria-label="Previous" (click)="changePage(page - 1)">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li *ngFor="let number of pageNumbers" [class.d-none]="(number > page + 2) || (number < page - 2)"
+              [class.active]="page == number" class="page-item">
+              <a class="page-link" (click)="changePage(number)">{{number}}</a>
+            </li>
+            <li class="page-item" [class.disabled]="page == pageNumbers.length">
+              <a class="page-link" (click)="changePage(page + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <li class="page-item" [class.disabled]="page == pageNumbers.length">
+              <a class="page-link" (click)="changePage(pageNumbers.length)" aria-label="End">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 </div>

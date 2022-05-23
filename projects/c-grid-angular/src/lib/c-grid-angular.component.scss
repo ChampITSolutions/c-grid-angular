@@ -1,0 +1,13 @@
+.sort span {
+  cursor: pointer;
+  user-select: none;
+}
+
+.show-count {
+  display: inline-block;
+  width: unset;
+}
+
+.pagination .page-item:not(.disabled) .page-link {
+  cursor: pointer;
+}
