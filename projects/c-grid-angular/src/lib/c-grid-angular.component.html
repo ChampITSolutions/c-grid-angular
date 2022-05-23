@@ -2,13 +2,24 @@
   <table class="table" [class.table-striped]="striped" aria-describedby="c-grid-table">
     <thead>
       <tr>
-        <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header)">
-          {{getConfig(CGridConf.ColumnName, header)}}
+        <th *ngFor="let header of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, header) + 
+          (getConfig(CGridConf.ColumnSort, header) ? ' text-primary sort' : '')">
+          <span [class.text-primary]="getConfig(CGridConf.ColumnSort, header)" (click)="sort(header)">
+            {{getConfig(CGridConf.ColumnName, header)}}
+          </span>
+          <span *ngIf="sortBy === header">
+            <small *ngIf="sortDirection === 1">
+              <i class="bi bi-caret-down-fill" aria-hidden="true"></i>
+            </small>
+            <small *ngIf="sortDirection === 2">
+              <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
+            </small>
+          </span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data">
+      <tr *ngFor="let row of sortedData">
         <td *ngFor="let column of headerOrder" [class]="'text-' + getConfig(CGridConf.ColumnAlign, column)">
           <span [class.fw-bold]="getConfig(CGridConf.ColumnBold, column)">
             {{getDisplayValue(row[column], column)}}

@@ -28,12 +28,23 @@ export interface CGridConfigDataColumn {
   align?: 'start' | 'end' | 'center'
   /** Set true to bold the column. Default value is false */
   bold?: boolean
+  /** Set true to separate each 3 digits by a comma (Applicable for numbers only) */
+  commaSeparate?: boolean
+  /** Data type for sorting */
+  dataType?: 'string' | 'date' | 'number'
+  /** Set true to disable sorting by the grid and just trigger the sort click event. Default is false */
+  disableInternalSort?: boolean
   /** Custom column name */
   name?: string
   /** Set column prefix */
   prefix?: string
+  /** Set true to enable sorting. Default is false. */
+  sort?: boolean
   /** Set column suffix */
   suffix?: string
-  /** Set true to separate each 3 digits by a comma (Applicable for numbers only) */
-  commaSeparate?: boolean
+}
+
+export interface CGridSortClickOut {
+  column: string
+  type: 'asc' | 'desc' | 'none'
 }
