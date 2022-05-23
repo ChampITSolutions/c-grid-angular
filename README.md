@@ -14,8 +14,10 @@
 - Column Configurations
   - Alignment
   - Bold
+  - Comma Separated Numbers
   - Custom Name
   - Prefix
+  - Sorting
   - Suffix
 
 ## Getting Started
@@ -64,6 +66,7 @@ config: CGridConfig = {
         name: "Amount",
         commaSeparate: true,
       },
+      name: { sort: true },
       id: { bold: true, suffix: "--", name: "#" },
     },
   },
