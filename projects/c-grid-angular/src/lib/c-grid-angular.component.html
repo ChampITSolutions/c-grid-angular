@@ -1,3 +1,21 @@
+<div class="d-print-none">
+  <div class="row">
+    <div class="col-12 d-flex px-4 text-end justify-content-end">
+      <div *ngIf="exportEnabled" class="btn-group dropdown ms-4">
+        <button id="exportMenu" type="button" [disabled]="!data?.length" class="btn btn-sm btn-primary dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false">
+
+          <i class="bi bi-download" aria-hidden="true"></i> Export As
+        </button>
+        <div class="dropdown-menu dropdown-menu-primary cgrid-dropdown" aria-labelledby="exportMenu">
+          <a (click)="exportTo(type)" *ngFor="let type of exportTypes" class="dropdown-item">
+            <i *ngIf="type.icon" [class]="type.icon" aria-hidden="true"></i> {{type.name}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div [class.table-responsive]="responsive">
   <table class="table" [class.table-striped]="striped" aria-describedby="c-grid-table">
     <thead>

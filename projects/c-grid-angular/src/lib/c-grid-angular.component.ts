@@ -1,7 +1,11 @@
 import { DecimalPipe } from '@angular/common'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { CGridConf } from './c-grid-angular.enum'
-import { CGridConfig, CGridConfigDataColumn, CGridData, CGridSortClickOut } from './c-grid-angular.interface'
+import { CGridConfig, CGridConfigDataColumn, CGridData, CGridExportMenuItem, CGridSortClickOut } from './c-grid-angular.interface'
+import { saveAs } from 'file-saver'
+import * as XLSX from 'xlsx'
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 @Component({
   selector: 'c-grid',
@@ -33,6 +37,37 @@ export class CGridAngularComponent implements OnInit {
     this.pageSize = value?.pagination?.pageSize ?? 10
     this.dataLength = value?.data?.length ?? 0
     this._headerOrder = value?.header?.order ?? this.headerOrder
+    this.exportEnabled = value?.data?.export?.enable ?? false
+
+    this.exportTypes = [] as CGridExportMenuItem[]
+
+    (value?.data?.export?.types ?? ['pdf', 'xlsx', 'csv']).forEach(type => {
+      if (type === 'pdf') {
+        this.exportTypes.push({
+          name: 'PDF File',
+          type: 'pdf',
+          icon: 'bi bi-file-earmark-pdf-fill'
+        })
+      }
+
+      if (type === 'xlsx') {
+        this.exportTypes.push({
+          name: 'Excel File',
+          type: 'xlsx',
+          icon: 'bi bi-file-earmark-excel-fill'
+        })
+      }
+
+      if (type === 'csv') {
+        this.exportTypes.push({
+          name: 'CSV File',
+          type: 'csv',
+          icon: 'bi bi-file-earmark-spreadsheet'
+        })
+      }
+    })
+
+    this.exportFileName = this.config?.data?.export?.fileName ?? 'c-grid-export'
   }
   get config(): CGridConfig | undefined {
     return this._config
@@ -53,6 +88,10 @@ export class CGridAngularComponent implements OnInit {
   CGridConf = CGridConf
   responsive = false
   striped = false
+
+  exportEnabled = false
+  exportTypes: CGridExportMenuItem[] = []
+  exportFileName = ''
 
   paginationEnabled = false
   pageSize = 10
@@ -133,6 +172,57 @@ export class CGridAngularComponent implements OnInit {
     returnVal = `${returnVal}${this.getConfig(CGridConf.ColumnSuffix, column) ?? ''}`
 
     return returnVal
+  }
+
+  exportTo(type: CGridExportMenuItem): void {
+    switch (type.type) {
+      case 'csv': {
+        // specify how you want to handle null values here
+        const replacer = (_key: any, value: any) => value === null ? '' : value
+        const header = this.headerOrder
+        const csv = this.data.map(row => header.map((fieldName: string) => JSON.stringify(row[fieldName], replacer)).join(','))
+
+        csv.unshift(header.join(','))
+
+        const csvArray = csv.join('\r\n')
+
+        const blob = new Blob([csvArray], { type: 'text/csv' })
+        saveAs(blob, `${this.exportFileName}.csv`)
+      } break
+
+      case 'xlsx': {
+        const header = this.headerOrder
+        const headerDisplay = header.map((head: string) => this.getConfig(CGridConf.ColumnName, head))
+        const body = this.data.map(row => header.map((fieldName: string) => row[fieldName]))
+
+        /* generate workbook and add the worksheet */
+        const wb = XLSX.utils.book_new()
+        const ws = XLSX.utils.json_to_sheet([])
+
+        XLSX.utils.sheet_add_aoa(ws, [headerDisplay])
+        XLSX.utils.sheet_add_json(ws, body, { origin: 'A2', skipHeader: true })
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
+
+        /* save to file */
+        XLSX.writeFile(wb, `${this.exportFileName}.xlsx`)
+      } break
+
+      case 'pdf': {
+        const header = this.headerOrder
+        const headerDisplay = header.map((head: string) => this.getConfig(CGridConf.ColumnName, head)) as string[]
+        const body = this.data.map(row => header.map((fieldName: string) => row[fieldName])) as string[][]
+
+        const doc = new jsPDF()
+
+        autoTable(doc, {
+          head: [headerDisplay], body, headStyles: {
+            fillColor: '#a61e2d'
+          }
+        })
+
+        doc.save(`${this.exportFileName}.pdf`)
+      } break
+    }
   }
 
   sort(column: string, emit = true): void {

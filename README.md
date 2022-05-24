@@ -27,7 +27,8 @@
 ### Install CGrid & Dependencies
 
 ```console
-$ npm install c-grid-angular bootstrap
+$ npm install c-grid-angular
+$ npm install bootstrap bootstrap-icons file-saver @popperjs/core xlsx jspdf jspdf-autotable
 ```
 
 ### Add CGrid Placeholder to HTML
@@ -126,6 +127,7 @@ ngOnInit(): void {
 | Property | Type                                              | Default   | Possible Values       | Description                     |
 | -------- | ------------------------------------------------- | --------- | --------------------- | ------------------------------- |
 | columns  | [CGridConfigDataColumns](#CGridConfigDataColumns) | undefined | N/A                   | Column Properties               |
+| export   | [CGridConfigDataExport](#CGridConfigDataExport)   | undefined | N/A                   | Data export configurations      |
 | length   | number                                            | undefined | Any number, undefined | Custom data length (pagination) |
 
 #### CGridConfigDataColumns
@@ -150,6 +152,14 @@ Following settings are applied to data within the selected column.
 | prefix              | string  | undefined | Any string, undefined | Prefix to the column data                                |
 | sort                | boolean | false     | true, false           | Enable sorting                                           |
 | suffix              | string  | undefined | Any string, undefined | Suffix to the column data                                |
+
+#### CGridConfigDataExport
+
+| Property | Type    | Default   | Possible Values       | Description                 |
+| -------- | ------- | --------- | --------------------- | --------------------------- |
+| enable   | boolean | N/A       | true, false           | Enable export menu          |
+| fileName | string  | undefined | Any string, undefined | Set custom export file name |
+| types    | string  | undefined | pdf, xlsx, csv        | Set the export types        |
 
 ### CGridConfigHeader
 
